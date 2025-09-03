@@ -9,6 +9,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  base: '/',
   test: {
     globals: true,
     environment: 'jsdom',
