@@ -1,34 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useAuth0 } from '@auth0/auth0-react';
 import './App.css'
+import Header from './components/layout/Header';
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isAuthenticated) {
+    console.log(user?.name);
+  } else {
+    console.log("Not logged in");
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="w-screen min-h-screen flex flex-col">
+      <Header />
+      {/* Main content */}
+      <div className="flex flex-col flex-1 overflow-y-auto bg-gradient-to-b from-green-900 to-green-700">
+        <p className="text-[clamp(1rem,4vw,3rem)] text-center px-5">Interval Timer</p>
+        {/* All links here */}
+        <div className="flex flex-col gap-5 justify-center w-full items-center">
+          <a className="text-[clamp(1rem,4vw,3rem)] hover:text-green-600" href="https://teabee.org">TeaBee Hub</a>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
