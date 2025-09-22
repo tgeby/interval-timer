@@ -1,35 +1,9 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import './App.css'
 import Header from './components/layout/Header';
-import { useEffect, useState } from 'react';
 
 function App() {
-  const [triedSilentSignIn, setTriedSilentSignIn] = useState(false);
 
-  const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      if (!isLoading && !isAuthenticated && !triedSilentSignIn) {
-        try {
-          await getAccessTokenSilently({
-            timeoutInSeconds: 5, 
-            cacheMode: "off"
-          });
-          console.log("Session found");
-        } catch (error) {
-          console.log("No existing session found: ", error);
-        } finally {
-          setTriedSilentSignIn(true);
-        }
-      } else if (isAuthenticated) {
-        setTriedSilentSignIn(true);
-      }
-    };
-    
-    checkAuth();
-  }, [isLoading, isAuthenticated, triedSilentSignIn, getAccessTokenSilently]);
-
+  
   return (
     <div className="w-screen min-h-screen flex flex-col">
       <Header />
