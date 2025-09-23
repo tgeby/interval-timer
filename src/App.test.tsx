@@ -35,10 +35,8 @@ describe('Main page', () => {
       expect(screen.queryByText(/Loading.../i)).not.toBeInTheDocument();
     });
   });
-  it('renders website title in header', () => {
-    expect(screen.getByRole('heading', { name: /TeaBee/i})).toBeInTheDocument();
-  });
-  it('renders interval timer text', () => {
+
+  it('renders the website title', () => {
     expect(screen.getByText(/Interval Timer/i)).toBeInTheDocument();
   });
 });

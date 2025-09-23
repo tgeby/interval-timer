@@ -1,19 +1,16 @@
 import './App.css'
 import Header from './components/layout/Header';
+import useDarkMode from './hooks/useDarkMode';
 
 function App() {
 
-  
+  const [isDark, setIsDark] = useDarkMode();  
   return (
-    <div className="w-screen min-h-screen flex flex-col">
-      <Header />
+    <div className="w-screen min-h-screen flex flex-col bg-gray-300 text-black dark:bg-gray-900 dark:text-white">
+      <Header isDark={isDark} setIsDark={setIsDark}/>
       {/* Main content */}
-      <div className="flex flex-col flex-1 overflow-y-auto bg-gradient-to-b from-green-900 to-green-700">
-        <p className="text-[clamp(1rem,4vw,3rem)] text-center px-5">Interval Timer</p>
-        {/* All links here */}
-        <div className="flex flex-col gap-5 justify-center w-full items-center">
-          <a className="text-[clamp(1rem,4vw,3rem)] hover:text-green-600" href="https://teabee.org">TeaBee Hub</a>
-        </div>
+      <div className="flex flex-col flex-1 overflow-y-auto">
+        
       </div>
     </div>
   )
